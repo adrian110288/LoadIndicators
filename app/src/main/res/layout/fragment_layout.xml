@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <com.loadindicators.adrianlesniak.library.LoaderView
+        android:id="@+id/imageLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="50dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/likeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="I Like it"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:onClick="sendLike"
+            android:background="@drawable/button_selector"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
