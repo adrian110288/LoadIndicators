@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.loadindicators.adrianlesniak.library.LoaderView
         android:id="@+id/imageLoader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        app:loaderFrameDelay="40"
+        app:loaderType="pacman" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:textColor="@android:color/black"
-        android:layout_marginTop="50dp"/>
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/likeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="I Like it"
+            android:background="@drawable/button_selector"
+            android:onClick="sendLike"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:text="I Like it"
             android:textAllCaps="true"
-            android:textSize="20sp"
             android:textColor="@android:color/black"
-            android:onClick="sendLike"
-            android:background="@drawable/button_selector"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 
