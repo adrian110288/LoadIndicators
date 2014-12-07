@@ -8,7 +8,7 @@ Have a look at my example app to see them in action:
 
 [![Foo](http://tcsdesignreno.com/wp-content/uploads/2012/09/Google-Play-Store-Icon.png)](https://play.google.com/store/apps/details?id=com.loadindicators.adrianlesniak.loadindicators)
 
-
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LoadIndicators-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1191)
 
 
 
@@ -89,4 +89,4 @@ The example app uses to Google Analytics which track "I Like buttons clicks" in 
 
 Big thanks for http://preloaders.net/ for providing spritesheets for the loaders and for Android Arsenal to help me advertise this library.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LoadIndicators-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1191)
+
