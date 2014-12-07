@@ -87,4 +87,6 @@ My future tasks will be to:
 P.S.
 The example app uses to Google Analytics which track "I Like buttons clicks" in order for me to track app engagament and favourite loaders so I can plan for future additions of new loaders.
 
-Big thanks for http://preloaders.net/ for providing spritesheets for the loaders.
+Big thanks for http://preloaders.net/ for providing spritesheets for the loaders and for Android Arsenal to help me advertise this library.
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LoadIndicators-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1191)
