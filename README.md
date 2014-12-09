@@ -35,7 +35,7 @@ There are two custom attributes ```loaderType``` and ```loaderFrameDelay```.
 
 ```loaderType``` allows yout to specify what animation you would like to display. Ate the moment all available are animations are:
 ```xml
-flop flop
+flip flop
 intersect
 map marker
 mini balls
