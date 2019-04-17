@@ -4,27 +4,21 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.loadindicators.adrianlesniak.library.LoaderType;
 import com.loadindicators.adrianlesniak.library.LoaderView;
 
 /**
  * Created by Adrian on 22-Nov-14.
  */
-public class PagerFragment extends Fragment implements View.OnClickListener
+public class PagerFragment extends Fragment
 {
     private LoaderView imageView;
     private TextView textView;
-    private Button likeItButton;
     private LoaderType loaderType;
     private Typeface typeface;
 
@@ -60,26 +54,11 @@ public class PagerFragment extends Fragment implements View.OnClickListener
         textView.setTypeface(typeface);
         textView.setText(loaderType.getFramesAmount() + " frames".toUpperCase());
 
-        likeItButton.setTypeface(typeface);
-        likeItButton.setOnClickListener(this);
-
         imageView.setLoader(loaderType);
     }
 
     private void getReferences(View view) {
-        imageView = (LoaderView) view.findViewById(R.id.imageLoader);
-        textView = (TextView) view.findViewById(R.id.text);
-        likeItButton = (Button) view.findViewById(R.id.likeButton);
-    }
-
-    @Override
-    public void onClick(View v) {
-        Tracker t = ((App) getActivity().getApplication()).getTracker();
-        t.send(new HitBuilders.EventBuilder().
-                setCategory("LIKE").
-                setLabel(loaderType.toString().toUpperCase().replaceAll("_", " " + " liked")).
-                build());
-
-        Toast.makeText(getActivity(), "Like sent", Toast.LENGTH_SHORT).show();
+        imageView = view.findViewById(R.id.imageLoader);
+        textView = view.findViewById(R.id.text);
     }
 }
