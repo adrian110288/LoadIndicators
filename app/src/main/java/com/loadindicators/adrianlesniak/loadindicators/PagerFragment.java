@@ -9,17 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.loadindicators.adrianlesniak.library.LoaderType;
-import com.loadindicators.adrianlesniak.library.LoaderView;
+import com.loadindicators.adrianlesniak.library.LoaderIndicator;
 
 /**
  * Created by Adrian on 22-Nov-14.
  */
 public class PagerFragment extends Fragment
 {
-    private LoaderView imageView;
+    private LoaderIndicator imageView;
     private TextView textView;
-    private LoaderType loaderType;
     private Typeface typeface;
 
     @Override
@@ -27,13 +25,11 @@ public class PagerFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/chunkfive.ttf");
-        loaderType = (LoaderType) getArguments().getSerializable("LOADER");
     }
 
-    public static PagerFragment newInstance(LoaderType describable) {
+    public static PagerFragment newInstance() {
         PagerFragment fragment = new PagerFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("LOADER", describable);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -50,11 +46,7 @@ public class PagerFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         getReferences(view);
-
         textView.setTypeface(typeface);
-        textView.setText(loaderType.getFramesAmount() + " frames".toUpperCase());
-
-        imageView.setLoader(loaderType);
     }
 
     private void getReferences(View view) {

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="LoaderView">
-        <attr name="loaderType" format="string" />
-        <attr name="loaderFrameDelay" format="integer" />
+    <declare-styleable name="LoaderIndicator">
+        <attr name="loader_src" format="reference" />
+        <attr name="loader_frameDuration" format="integer" />
+        <attr name="loader_frameCount" format="integer" />
+        <attr name="loader_autoStart" format="boolean" />
+        <attr name="loader_canLoop" format="boolean" />
+        <attr name="loader_loopInReverse" format="boolean" />
     </declare-styleable>
 </resources>
