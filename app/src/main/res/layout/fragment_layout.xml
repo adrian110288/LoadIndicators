@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         app:loader_frameCount="10"
-        app:loader_src="@string/app_name" />
+        app:loader_src="@drawable/pacman_10" />
 
     <TextView
         android:id="@+id/text"

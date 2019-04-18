@@ -2,13 +2,9 @@ package com.loadindicators.adrianlesniak.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
@@ -78,12 +74,15 @@ public class LoaderIndicator extends AppCompatImageView {
             animationDrawable = getSpriteAnimation(
                     loaderSrc,
                     frameCount,
-                    canLoop
+                    frameDuration
             );
+
+            animationDrawable.setOneShot(!canLoop);
+
             setAnimation(animationDrawable);
 
             if (autoStart) {
-                animationDrawable.start();
+                this.startAnimate();
             }
         }
     }
@@ -110,48 +109,17 @@ public class LoaderIndicator extends AppCompatImageView {
         }
     }
 
-    @NonNull
-    private Bitmap getBitmapFromDrawable(@DrawableRes int drawableResId) {
+    private AnimationDrawable getSpriteAnimation(@DrawableRes int drawableResId,
+                                                 int frameCount,
+                                                 int frameDuration) {
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableResId);
+        Slicer slicer = new SpriteSlicer(frameCount);
 
-        if (bitmap == null) {
-            throw new IllegalArgumentException("Could not decode drawable from given resource id. Ensure drawable resources is passed.");
-        }
-
-        return bitmap;
-    }
-
-    private Bitmap[] getSpriteArray(@DrawableRes int drawableResId, int frameCount) {
-
-        Bitmap bitmap = getBitmapFromDrawable(drawableResId);
-
-        Bitmap[] tileArray = new Bitmap[frameCount];
-        final int tildWidth = bitmap.getWidth() / frameCount;
-
-        int offset = 0;
-
-        for (int i = 0; i < frameCount; i++) {
-            tileArray[i] = Bitmap.createBitmap(bitmap, offset, 0, tildWidth, bitmap.getHeight());
-            offset += tildWidth;
-        }
-
-        return tileArray;
-    }
-
-    private AnimationDrawable getSpriteAnimation(@DrawableRes int drawableResId, int frameCount, boolean canLoop) {
-
-
-        AnimationDrawable animationDrawable = new AnimationDrawable();
-
-        Bitmap[] spriteArray = getSpriteArray(drawableResId, frameCount);
-
-        for (Bitmap bitmap : spriteArray) {
-            animationDrawable.addFrame(new BitmapDrawable(getResources(), bitmap), frameDuration);
-        }
-
-        animationDrawable.setOneShot(!canLoop);
-
-        return animationDrawable;
+        return new AnimatedLoaderDrawable(
+                drawableResId,
+                frameDuration,
+                slicer,
+                getResources()
+        );
     }
 }
