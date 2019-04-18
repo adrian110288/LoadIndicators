@@ -10,32 +10,53 @@ import android.support.annotation.NonNull;
 
 public class AnimatedLoaderDrawable extends AnimationDrawable {
 
-    AnimatedLoaderDrawable(@DrawableRes int loaderSrc,
-                           int frameDuration,
+    private boolean loopInReverse;
+
+    private Bitmap[] spriteArray;
+
+    private boolean reversing = false;
+
+    AnimatedLoaderDrawable(Resources resources,
                            Slicer slicer,
-                           Resources resources) {
+                           @DrawableRes int loaderSrc,
+                           int frameDuration,
+                           boolean loopInReverse) {
 
         Bitmap spriteBitmap = getBitmapFromDrawable(loaderSrc, resources);
-        Bitmap[] spriteArray = slicer.slice(spriteBitmap);
+        spriteArray = slicer.slice(spriteBitmap);
 
         for (Bitmap bitmap : spriteArray) {
             this.addFrame(new BitmapDrawable(resources, bitmap), frameDuration);
         }
+
+        this.loopInReverse = loopInReverse;
     }
 
-//    @Override
-//    public boolean selectDrawable(int idx) {
-//        boolean ret = super.selectDrawable(idx);
-//
-//        if ((idx != 0) && (idx == getNumberOfFrames() - 1)) {
-//            if (!finished) {
-//                finished = true;
-//                if (animationFinishListener != null) animationFinishListener.onAnimationFinished();
-//            }
-//        }
-//
-//        return ret;
-//    }
+    @Override
+    public boolean selectDrawable(int idx) {
+
+        if (!loopInReverse) {
+            return super.selectDrawable(idx);
+        } else {
+
+            if (reversing) {
+
+                int newIdx = spriteArray.length - idx - 1;
+                if (newIdx == 0) {
+                    reversing = false;
+                }
+                return super.selectDrawable(newIdx);
+
+            } else {
+
+                if (idx == spriteArray.length - 1) {
+                    reversing = true;
+                }
+
+                return super.selectDrawable(idx);
+            }
+        }
+    }
 
     @NonNull
     private Bitmap getBitmapFromDrawable(@DrawableRes int drawableResId, Resources resources) {

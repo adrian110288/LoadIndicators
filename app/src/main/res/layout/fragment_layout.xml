@@ -9,8 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:loader_frameCount="10"
-        app:loader_src="@drawable/pacman_10" />
+        app:loader_frameCount="32"
+        app:loader_loopInReverse="true"
+        app:loader_src="@drawable/flip_flop_32" />
 
     <TextView
         android:id="@+id/text"

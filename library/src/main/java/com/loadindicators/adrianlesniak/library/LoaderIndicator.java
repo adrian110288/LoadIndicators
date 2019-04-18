@@ -74,7 +74,8 @@ public class LoaderIndicator extends AppCompatImageView {
             animationDrawable = getSpriteAnimation(
                     loaderSrc,
                     frameCount,
-                    frameDuration
+                    frameDuration,
+                    loopInReverse
             );
 
             animationDrawable.setOneShot(!canLoop);
@@ -111,15 +112,17 @@ public class LoaderIndicator extends AppCompatImageView {
 
     private AnimationDrawable getSpriteAnimation(@DrawableRes int drawableResId,
                                                  int frameCount,
-                                                 int frameDuration) {
+                                                 int frameDuration,
+                                                 boolean loopInReverse) {
 
         Slicer slicer = new SpriteSlicer(frameCount);
 
         return new AnimatedLoaderDrawable(
+                getResources(),
+                slicer,
                 drawableResId,
                 frameDuration,
-                slicer,
-                getResources()
+                loopInReverse
         );
     }
 }
