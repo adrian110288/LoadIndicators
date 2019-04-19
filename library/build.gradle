@@ -1,7 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
 group='com.github.adrian110288'
+version = '1.1.0'
 
 android {
     compileSdkVersion 28
@@ -19,7 +27,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
         }
     }
 }
