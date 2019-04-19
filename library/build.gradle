@@ -8,8 +8,8 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
-group='com.github.adrian110288'
-version = '1.1.0'
+group = 'com.github.adrian110288'
+version = '1.1.1'
 
 android {
     compileSdkVersion 28
@@ -18,7 +18,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 2
-        versionName "1.1"
+        versionName "1.1.1"
     }
 
     compileOptions {
