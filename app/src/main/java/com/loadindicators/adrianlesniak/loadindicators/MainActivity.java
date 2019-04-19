@@ -28,19 +28,17 @@ public class MainActivity extends FragmentActivity {
     private List<LoaderModel> getLoaderModels() {
 
         List<LoaderModel> models = new ArrayList<>();
+        models.add(new LoaderModel("8 Ball", R.drawable.billard_ball_21, 21));
         models.add(new LoaderModel("Windows", R.drawable.windows_8_loader_75, 75));
-        models.add(new LoaderModel("Flip flop", R.drawable.flip_flop_32, 32));
-        models.add(new LoaderModel("Intersect", R.drawable.intersect_20, 20));
-        models.add(new LoaderModel("Map marker", R.drawable.map_marker_15, 15));
-        models.add(new LoaderModel("Mini balls", R.drawable.mini_balls_12, 12));
-        models.add(new LoaderModel("Pacman", R.drawable.pacman_10, 10));
-        models.add(new LoaderModel("Pulse", R.drawable.pulse_8, 8));
-        models.add(new LoaderModel("Radar", R.drawable.radar_16, 16));
-        models.add(new LoaderModel("Ring Race", R.drawable.ring_race_18, 18));
-        models.add(new LoaderModel("Running snake", R.drawable.running_snake_24, 24));
-        models.add(new LoaderModel("Searching", R.drawable.searching_18, 18));
-        models.add(new LoaderModel("Skype", R.drawable.skype_29, 29));
+        models.add(new LoaderModel("Earth", R.drawable.earth_30, 30));
+        models.add(new LoaderModel("Tron", R.drawable.tron_60, 60));
+        models.add(new LoaderModel("Flag", R.drawable.flag_20, 20));
         models.add(new LoaderModel("Snake", R.drawable.snake_3d_8, 8));
+        models.add(new LoaderModel("Map Marker", R.drawable.map_marker_15, 15));
+        models.add(new LoaderModel("Skype", R.drawable.skype_29, 29));
+        models.add(new LoaderModel("Mini balls", R.drawable.mini_balls_12, 12));
+        models.add(new LoaderModel("Running snake", R.drawable.running_snake_24, 24));
+        models.add(new LoaderModel("Ring race", R.drawable.ring_race_18, 18));
 
         return models;
     }
