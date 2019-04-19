@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
@@ -19,23 +20,19 @@ public class LoaderIndicator extends AppCompatImageView {
     private static final boolean DEFAULT_LOOP_IN_REVERSE = false;
 
     @DrawableRes
-    private int loaderSrc;
+    private int loaderSrc = LOADER_SRC_MISSING;
 
-    private int frameDuration;
+    private int frameCount = 0;
 
-    private int frameCount;
+    private int frameDuration = DEFAULT_FRAME_DURATION;
 
-    private boolean autoStart;
+    private boolean autoStart = DEFAULT_AUTO_START;
 
-    private boolean canLoop;
+    private boolean canLoop = DEFAULT_CAN_LOOP;
 
-    private boolean loopInReverse;
+    private boolean loopInReverse = DEFAULT_LOOP_IN_REVERSE;
 
     private AnimationDrawable animationDrawable;
-
-    public LoaderIndicator(Context context) {
-        this(context, null);
-    }
 
     public LoaderIndicator(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -43,54 +40,87 @@ public class LoaderIndicator extends AppCompatImageView {
         if (attrs != null) {
             TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LoaderIndicator, 0, 0);
 
-            int frameCount = ta.getInteger(R.styleable.LoaderIndicator_loader_frameCount, 0);
-            if (frameCount < 1) {
-                throw new IllegalArgumentException("Loader frame count most be 1 or greater.");
-            } else {
-                this.frameCount = frameCount;
-            }
-
             if (ta.hasValue(R.styleable.LoaderIndicator_loader_src) &&
                     !ta.hasValue(R.styleable.LoaderIndicator_loader_frameCount)) {
-                throw new IllegalArgumentException("Loader frame count must be specified!");
+                throw new IllegalArgumentException("Loader frame count must be specified and must be 1 or larger!");
             }
 
             loaderSrc = ta.getResourceId(R.styleable.LoaderIndicator_loader_src, LOADER_SRC_MISSING);
+            frameCount = ta.getInteger(R.styleable.LoaderIndicator_loader_frameCount, 0);
             frameDuration = ta.getInteger(R.styleable.LoaderIndicator_loader_frameDuration, DEFAULT_FRAME_DURATION);
             autoStart = ta.getBoolean(R.styleable.LoaderIndicator_loader_autoStart, DEFAULT_AUTO_START);
             canLoop = ta.getBoolean(R.styleable.LoaderIndicator_loader_canLoop, DEFAULT_CAN_LOOP);
             loopInReverse = ta.getBoolean(R.styleable.LoaderIndicator_loader_loopInReverse, DEFAULT_LOOP_IN_REVERSE);
 
             ta.recycle();
-
         }
 
-        init();
+        animationDrawable = createAnimation();
+
+        if (autoStart) {
+            this.startAnimate();
+        }
     }
 
-    private void init() {
+    public void setLoaderSource(@DrawableRes int loaderSrc, @IntRange(from = 1) int frameCount) {
+        this.frameCount = frameCount;
+        this.loaderSrc = loaderSrc;
 
-        if (loaderSrc != LOADER_SRC_MISSING) {
-            animationDrawable = getSpriteAnimation(
-                    loaderSrc,
-                    frameCount,
-                    frameDuration,
-                    loopInReverse
-            );
+        animationDrawable = createAnimation();
+    }
 
+    public void setFrameDuration(int frameDuration) {
+        this.frameDuration = frameDuration;
+
+        animationDrawable = createAnimation();
+    }
+
+    public void setCanLoop(boolean canLoop) {
+        this.canLoop = canLoop;
+
+        if (animationDrawable == null) {
+            animationDrawable = createAnimation();
+        } else {
             animationDrawable.setOneShot(!canLoop);
-
-            setAnimation(animationDrawable);
-
-            if (autoStart) {
-                this.startAnimate();
-            }
         }
+    }
+
+    public LoaderIndicator(Context context) {
+        this(context, null);
+    }
+
+    public void setLoopInReverse(boolean loopInReverse) {
+        this.loopInReverse = loopInReverse;
+        animationDrawable = createAnimation();
+    }
+
+    private AnimationDrawable createAnimation() {
+
+        if (loaderSrc == LOADER_SRC_MISSING || frameCount < 1) {
+            return null;
+        }
+
+        AnimationDrawable animationDrawable = getSpriteAnimation(
+                loaderSrc,
+                frameCount,
+                frameDuration,
+                loopInReverse
+        );
+
+        animationDrawable.setOneShot(!canLoop);
+
+        return animationDrawable;
     }
 
     public void startAnimate() {
 
-        if (animationDrawable != null && !animationDrawable.isRunning()) {
+        if (animationDrawable == null) {
+            return;
+        }
+
+        setAnimation(animationDrawable);
+
+        if (!animationDrawable.isRunning()) {
             animationDrawable.start();
         }
     }

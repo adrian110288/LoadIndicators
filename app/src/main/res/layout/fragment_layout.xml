@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
     <com.loadindicators.adrianlesniak.library.LoaderIndicator
-        android:id="@+id/imageLoader"
+        android:id="@+id/loader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:loader_frameCount="32"
-        app:loader_loopInReverse="true"
-        app:loader_src="@drawable/flip_flop_32" />
+        android:layout_centerInParent="true" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/frames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 

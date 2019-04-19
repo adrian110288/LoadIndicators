@@ -6,7 +6,7 @@ public class SpriteSlicer implements Slicer {
 
     private int frameCount;
 
-    public SpriteSlicer(int frameCount) {
+    SpriteSlicer(int frameCount) {
         this.frameCount = frameCount;
     }
 
