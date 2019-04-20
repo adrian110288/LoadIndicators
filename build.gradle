@@ -1,4 +1,17 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+project.ext {
+    APP_ID = "com.loadindicators.adrianlesniak.loadindicators"
+    VERSION_CODE = 3
+    VERSION_NAME = "1.1"
+
+    KEYSTORE_STORE_FILE = rootProject.file(keystoreProperties['storeFile'])
+    KEYSTORE_STORE_PASSWORD = keystoreProperties['storePassword']
+    KEYSTORE_KEY_ALIAS = keystoreProperties['keyAlias']
+    KEYSTORE_KEY_PASSWORD = keystoreProperties['keyPassword']
+}
 
 buildscript {
     repositories {

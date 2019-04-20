@@ -1,14 +1,22 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile project.KEYSTORE_STORE_FILE
+            storePassword project.KEYSTORE_STORE_PASSWORD
+            keyAlias project.KEYSTORE_KEY_ALIAS
+            keyPassword project.KEYSTORE_KEY_PASSWORD
+        }
+    }
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.loadindicators.adrianlesniak.loadindicators"
+        applicationId project.APP_ID
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.1"
+        versionCode project.VERSION_CODE
+        versionName project.VERSION_NAME
     }
 
     compileOptions {
@@ -18,6 +26,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            signingConfig signingConfigs.release
         }
     }
 
